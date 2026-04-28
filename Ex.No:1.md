@@ -1,10 +1,11 @@
+
 # Ex. No : 1
 
 # IMPLEMENTATION OF SYMBOL TABLE
 
-## Register Number :
+## Register Number : 212223110013
 
-## Date :
+## Date : 28/04/2026
 
 ## AIM:
       To write a C program to implement a symbol table.
@@ -22,12 +23,91 @@
 8. Stop the program.
    
 ## PROGRAM:
+```
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAX_EXPRESSION_SIZE 100
+
+int main() {
+    int i = 0, j = 0, x = 0, n, flag = 0;
+    void *add[50];   // increased size
+    char b[MAX_EXPRESSION_SIZE], d[50], c, srch;
+
+    printf("Enter the Expression terminated by $: ");
+
+    // Read input
+    while ((c = getchar()) != '$' && i < MAX_EXPRESSION_SIZE - 1) {
+        b[i++] = c;
+    }
+    b[i] = '\0';
+
+    n = i - 1;
+
+    printf("Given Expression: %s\n", b);
+
+    printf("\nSymbol Table\n");
+    printf("Symbol\tAddress\t\tType\n");
+
+    // Build symbol table
+    for (j = 0; j <= n; j++) {
+        c = b[j];
+
+        if (isalpha((unsigned char)c)) {
+            if (j == n) {
+                void *p = malloc(sizeof(char));
+                add[x] = p;
+                d[x] = c;
+                printf("%c\t%p\tidentifier\n", c, p);
+                x++;
+            } else {
+                char ch = b[j + 1];
+
+                if (ch == '+' || ch == '-' || ch == '*' || ch == '=' || ch == '/') {
+                    void *p = malloc(sizeof(char));
+                    add[x] = p;
+                    d[x] = c;
+                    printf("%c\t%p\tidentifier\n", c, p);
+                    x++;
+                }
+            }
+        }
+    }
+
+    // Search symbol
+    printf("\nEnter the symbol to be searched: ");
+    scanf(" %c", &srch);
+
+    for (i = 0; i < x; i++) {   // corrected loop condition
+        if (srch == d[i]) {
+            printf("Symbol Found\n");
+            printf("%c @ address %p\n", srch, add[i]);
+            flag = 1;
+            break;
+        }
+    }
+
+    if (flag == 0)
+        printf("Symbol Not Found\n");
+
+    // Free memory
+    for (i = 0; i < x; i++) {
+        free(add[i]);
+    }
+
+    return 0;
+}
+```
 
 
 ## OUTPUT:
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9348d305-007f-413c-a230-74d098be88bf" />
 
 
 
 ## RESULT:
+The program to implement a symbol table is executed and the output is verified.
 
 The program to implement a symbol table is executed and the output is verified.
